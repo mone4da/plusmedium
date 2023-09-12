@@ -1,5 +1,4 @@
 const config = require('./config')
-const msg = require('../message')
 
 class Prompt extends require('./processor'){
 	constructor(){
