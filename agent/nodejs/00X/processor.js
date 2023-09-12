@@ -7,7 +7,7 @@ class Processor extends require('../session'){
 
 	onSignal(error, data){
 		switch(data.subject){
-			case 'echo' : this.onHello(data); break;
+			case 'hello' : this.onHello(data); break;
 		}
 	}
 
