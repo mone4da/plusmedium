@@ -30,6 +30,7 @@ class Processor extends require('../session'){
 	onHello(data){}
 
 	hello(from, to, detail){
+		console.log(from, to,detail)
 		this.send('data', msg.create(
 			from,
 			to,

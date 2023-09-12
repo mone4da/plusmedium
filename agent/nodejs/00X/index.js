@@ -19,10 +19,11 @@ class Prompt extends require('./processor'){
 
 	onGranted(data){
 		console.log('granted', data)
+		this.hello(this.config.credentials.address, config.peers.feuler, 'hello there')
 	}
 
 	onHello(data){
-		this.echo(this.address, data.from, config.greeting )
+		this.hello(this.config.credentials.address, data.from, config.greeting )
 	}
 }
 
