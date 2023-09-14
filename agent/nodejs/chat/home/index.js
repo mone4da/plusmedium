@@ -24,7 +24,6 @@ class Sender extends Component{
 
         let send = document.getElementById('send')
         send.onclick = () => {
-                this.update('out', Date.now())
                fetch('/send', {
                     method: 'POST',
                     headers: {
