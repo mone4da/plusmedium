@@ -6,7 +6,10 @@ class Desk{
 		app.use(xpr.static(config.home))
 		app.use(xpr.json())
 
-		app.post('/send', (req, res) => this.send(req.body) )
+		app.post('/send', (req, res) => {
+			this.send(req.body) 
+			res.end()
+		})
 		app.get('/event', (req, res) => this.addSession(res))
 
 		app.listen(config.port, () => this.onListening())

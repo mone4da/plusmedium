@@ -10,6 +10,11 @@ class Component{
         let e = document.getElementById(id)
         e.value = data
     }
+
+    updateLabel(id, data){
+        let e = document.getElementById(id)
+        e.textContent = data
+    }
     
 }
 
@@ -19,7 +24,8 @@ class Sender extends Component{
 
         let send = document.getElementById('send')
         send.onclick = () => {
-                fetch('/send', {
+                this.update('out', Date.now())
+               fetch('/send', {
                     method: 'POST',
                     headers: {
                         "Content-Type" : "application/json"
@@ -27,7 +33,8 @@ class Sender extends Component{
                      body: JSON.stringify({
                             message: this.message('out')
                      })
-                })
+                }).catch(e => console.log(e) )
+                
         }
     }
 }
@@ -35,10 +42,12 @@ class Sender extends Component{
 class Receiver extends Component{
     constructor(){
         super()
-        
+
         let es = new EventSource('/event')
         es.onmessage = e => {
-            this.update('in', e.data)
+            let data = JSON.parse(e.data)
+            this.update('in', data.message)
+            //this.updateLabel('latency', 'latency : ' + data.latency)
         }
     }
 }

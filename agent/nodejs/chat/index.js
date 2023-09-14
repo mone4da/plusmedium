@@ -33,7 +33,9 @@ class Prompt extends require('./processor'){
 
 	onChat(data){
 		console.log('response', data)
-		notifier.notify(data.detail)
+
+		let message = JSON.stringify({message: data.detail, latency: Date.now() - data.timestamp})
+		notifier.notify(message)
 	}
 
 	sendMessage(message){
@@ -52,6 +54,7 @@ class App extends require('./desk'){
 	}
 
 	send(data){
+		console.log('send', data)
 		prompt.sendMessage(data.message)
 	}
 

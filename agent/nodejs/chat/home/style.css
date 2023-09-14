@@ -17,6 +17,11 @@ html, body{
     height: 100px;    
 }
 
+#latency{
+    height: 20px;
+    resize: none;
+}
+
 #prompt{
     display: grid;
     grid-template-columns: auto 50px;
