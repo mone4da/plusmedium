@@ -22,7 +22,3 @@ Our Notifier class is designed to work with a single session by default, but its
 
 #### Unleash Your Creativity
 With Chaty Chaty, the sky's the limit for developers! Modify it, scale it, integrate it with other services—make it your own.
-
----
-
-Feel free to adjust as necessary to better fit your specific needs or context.
