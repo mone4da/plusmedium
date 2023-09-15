@@ -1,29 +1,45 @@
 html, body{
     margin: 0;
     padding: 0;
+}
 
+#root{
     display: flex;
-    flex-direction: column; 
-    align-items: center;
+    flex-direction: column;
 }
 
-#dialog{
-    display: flex;
-    flex-direction: column; 
-    width: 400px;
-}
-
-#in{
-    height: 100px;    
-}
-
-#latency{
-    height: 20px;
-    resize: none;
-}
-
-#prompt{
+#header{
     display: grid;
-    grid-template-columns: auto 50px;
-    height: 50px;
+    grid-template-columns: auto 35%;
+    height: 100px;
+    background: rgb(28, 100, 133);
+    color: white;
+}
+
+#logo{
+    display: flex;
+    flex-direction: column;
+}
+
+#name{
+    width: 200px;
+}
+#door{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+}
+
+#controlpanel{
+    display: grid;
+    grid-template-columns: 50% auto;
+    height: 400px;
+}
+
+#message{
+    background: blue;
+}   
+
+#peers{
+    display: flex;
 }

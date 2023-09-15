@@ -6,16 +6,18 @@ class Processor extends require('../session'){
 	}
 
 	onSignal(error, data){
-		switch(data.subject){
-			case 'echo' : this.onHello(data); break;
-			case 'chat' : this.onChat(data); break;
-		}
+		this.onCommand(data)
 	}
 
 	onData(error, data){
+		this.onCommand(data)
+	}
+
+	onCommand(data){
 		switch(data.subject){
 			case 'hello' : this.onHello(data); break;
 			case 'chat' : this.onChat(data); break;
+			case 'peer.add' : this.onAddPeer(data); break;
 		}
 	}
 
@@ -29,6 +31,8 @@ class Processor extends require('../session'){
 
 
 	onHello(data){}
+	onChat(data){}
+	onAddPeer(data){}
 
 	hello(from, to, detail){
 		this.send('data', msg.create(
@@ -37,8 +41,6 @@ class Processor extends require('../session'){
 			'hello',
 			detail ) )
 	}
-
-	onChat(data){}
 
 	chat(from, to, detail){
 		this.send('data', msg.create(

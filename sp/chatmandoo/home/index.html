@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
 	<title>Chatmandoo</title>
-	<!-- link rel="stylesheet" href="style.css" -->
+	<link rel="stylesheet" href="style.css" >
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
 	<script src="index.js"></script>
 
 	<body onload="onload();">
-	  <div class="container">
-		<h3>Chatmandoo!</h3>
-			<label id="latency"></label>
-			<div id="dialog">
-				<div>
-					<textarea id="in" readonly></textarea>
-					<div id="prompt">
-						<textarea id="out"></textarea>
-						<button id="send">send</button>
-					</div>
+		<div id="root" class="container">
+			<div id="header">
+				<div id="logo">
+					<h1>Chatmandoo</h1>
+					<label id="latency">latency: 45</label>
+				</div>
+
+				<div id="door">
+					<button>join</button>
+					<input id="name" type="text">
 				</div>
 			</div>
-	</div>
+
+			<div id="controlpanel">
+				<div id="message">
+
+				</div>
+
+				<div id="peers">
+					
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

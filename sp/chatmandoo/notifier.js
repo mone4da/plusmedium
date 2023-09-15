@@ -1,3 +1,5 @@
+const uuid = require('uuid')
+
 class Session{
 	constructor(res, close){
         console.log('session ...')
@@ -23,17 +25,21 @@ class Session{
 
 class Notifier{
 	constructor(){
-		this.sessions = []
+		this.sessions = {}
 	}
 
 	addSession(res){
-		this.sessions = []
-		this.sessions.push( new Session(res, () => this.sessions = []) )
+		let  id = uuid.v4()
+		this.sessions[id] = new Session(res,id, () => {
+			delete this.sessions[id]
+		}) 
 	}
 
 	notify(data){
-		for(let s of this.sessions)
-			s.notify(data)
+		let peer = this.sessions[data.to]
+		peer?.notify(data)
+
+		return peer !== undefined
 	}
 }
 

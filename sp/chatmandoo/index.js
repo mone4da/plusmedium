@@ -38,6 +38,10 @@ class Prompt extends require('./processor'){
 		notifier.notify(message)
 	}
 
+	onAddPeer(data){
+		notifier.notify({target: 'peers', ...data.detail})
+	}
+
 	sendMessage(message){
 		this.chat(this.address, this.peers.feuler, message )
 	}
@@ -55,7 +59,7 @@ class App extends require('./desk'){
 
 	send(data){
 		console.log('send', data)
-		prompt.sendMessage(data.message)
+		!notifier.notify(data) || prompt.sendMessage(data.message)
 	}
 
 	addSession(res){
