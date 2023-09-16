@@ -1,3 +1,5 @@
+let user = {id: '', name: ''}
+
 class Component{
     constructor(){
     }
@@ -33,7 +35,6 @@ class Sender extends Component{
                             message: this.message('out')
                      })
                 }).catch(e => console.log(e) )
-                
         }
     }
 }
@@ -56,8 +57,13 @@ class Peers extends Component{
         this.list = []
     }
 
-    update(data){
-        this.list.push(data.peer)
+    add(data){
+        this.list.push(data)
+        this.render()
+    }
+
+    remove(data){
+        this.list = this.list.filter(item => item.id != data.id)
         this.render()
     }
 
@@ -71,6 +77,34 @@ class Peers extends Component{
 class Header extends Component{
     constructor(){
         super()
+
+        let join = document.getElementById('join')
+        join.onclick = () => {
+            fetch('/join', {
+                method: 'POST',
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                 body: JSON.stringify({
+                        id: user.id,
+                        name: user.name
+                 })
+            }).catch(e => console.log(e) )
+        }
+
+        let name = document.getElementById('name')
+        name.onchange = e => {
+            user.name = e.target.value
+
+            console.log(user)
+        }
+
+    }
+
+    update(data){
+        let {id, name} = data
+        user.id = id 
+        user.name = name
     }
 }
 
@@ -90,8 +124,11 @@ class Dispatcher extends Component{
         let es = new EventSource('/event')
         es.onmessage = e => {
             let data = JSON.parse(e.data)
-            switch(data.target){
-                case 'peers' : this.peers.update(data.message); break;
+            console.log(data)
+            switch(data.event){
+                case 'peers+' : this.peers.add(data.message); break;
+                case 'peers-' : this.peers.remove(data.message); break;
+                case 'user' : this.header.update(data.message)
             }
         }
     }

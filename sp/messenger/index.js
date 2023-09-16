@@ -40,6 +40,10 @@ class Prompt extends require('./processor'){
 	}
 
 	onAddPeer(data){
+		let {id, name} = data.detail
+		peers.add(id, name)
+
+		console.log('new peer', peers.list())
 	}
 	onRemPeer(data){
 	}
@@ -47,10 +51,14 @@ class Prompt extends require('./processor'){
 	}
 	onSetPeer(data){
 	}
-	onLstPeer(data){
-	}
 
+	onLstPeer(data){
+		this.peers(this.address, data.from, peers.list())
+	}
+	
 	onAddMsg(data){
+		let {from, to, time, message} = data.detail
+		messages.add(from, to, time, message)
 	}
 	onRemMsg(data){
 	}

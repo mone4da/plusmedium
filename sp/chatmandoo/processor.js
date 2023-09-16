@@ -50,6 +50,13 @@ class Processor extends require('../session'){
 			detail ) )
 	}
 
+	chatmandoo(from, to, id, name){
+		this.send('data', msg.create(
+			from,
+			to,
+			'peer.add',
+			{id, name} ) )
+	}
 }
 
 module.exports = Processor

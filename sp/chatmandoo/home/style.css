@@ -10,7 +10,7 @@ html, body{
 
 #header{
     display: grid;
-    grid-template-columns: auto 35%;
+    grid-template-columns: auto 30%;
     height: 100px;
     background: rgb(28, 100, 133);
     color: white;
@@ -26,7 +26,7 @@ html, body{
 }
 #door{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 30px;
 }
 
@@ -37,9 +37,13 @@ html, body{
 }
 
 #message{
-    background: blue;
+    display: flex;
 }   
 
 #peers{
     display: flex;
+}
+
+#slogan{
+    font-size: small;
 }

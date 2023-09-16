@@ -9,15 +9,15 @@ module.exports = {
 		host: 'http://217.76.52.255:20000',
 
 		credentials: {
-			accesskey: 'ACCESSKEY',
-			password: 'PASSWORD',
-			address: 'ADDRESS'
+			accesskey: '',
+			password: '',
+			address: 'system.plusmedium.4digitalassets.com'
 		},
 
 		greeting: "Welcome to the system",
 
 		peers: {
-			system: 'system'
+			system: 'operator.plusmedium.4digitalassets.com'
 		}
 	}
 }

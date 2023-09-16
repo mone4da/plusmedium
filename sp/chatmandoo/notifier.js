@@ -1,8 +1,10 @@
 const uuid = require('uuid')
 
 class Session{
-	constructor(res, close){
-        console.log('session ...')
+	constructor(res, id, close){
+        console.log('session ...', id)
+
+		this.id = id
 		this.res = res
 		this.res.set({
 				'Access-Control-Allow-Origin': '*',
@@ -13,9 +15,16 @@ class Session{
 
 		res.flushHeaders()
 
+		this.welcome()
+
 		this.res.socket.on('close', () => {
 				close && close()
 		})
+	}
+
+	welcome(){
+		let data = JSON.stringify({target: 'user', message:{ id: this.id, name: ''}})
+		this.res.write(`data: ${data}\n\n`)
 	}
 
 	notify(data){
@@ -32,7 +41,11 @@ class Notifier{
 		let  id = uuid.v4()
 		this.sessions[id] = new Session(res,id, () => {
 			delete this.sessions[id]
+
+			this.broadcast(id, {event: 'peers-', message: {id}})
 		}) 
+
+		return id
 	}
 
 	notify(data){
@@ -40,6 +53,20 @@ class Notifier{
 		peer?.notify(data)
 
 		return peer !== undefined
+	}
+
+	broadcast(from, message){
+		let peers = Object.values(this.sessions).filter(s => s.id != from)
+		for(let peer of peers)
+			peer.notify(message)
+	}
+
+	join(id, name){
+		let session = this.sessions[id]
+		session?.name = name
+		session?.joined = true
+
+		this.broadcast(id, {event: 'peers+', message: {id, name}})
 	}
 }
 

@@ -24,7 +24,6 @@ class Prompt extends require('./processor'){
 
 	onGranted(data){
 		console.log('granted', data)
-		this.hello(this.address, this.peers.feuler, 'hello there')
 	}
 
 	onHello(data){
@@ -45,7 +44,6 @@ class Prompt extends require('./processor'){
 	sendMessage(message){
 		this.chat(this.address, this.peers.feuler, message )
 	}
-	
 }
 
 class App extends require('./desk'){
@@ -65,6 +63,12 @@ class App extends require('./desk'){
 	addSession(res){
 		notifier.addSession(res)
 	}
+
+	onJoin(id, name){
+		console.log('join', id, name)
+		motifier.join(id, name)
+	}
+
 }
 
 

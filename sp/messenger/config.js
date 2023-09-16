@@ -9,16 +9,15 @@ module.exports = {
 		host: 'http://217.76.52.255:20000',
 
 		credentials: {
-				accesskey: 'ACCESSKEY',
-			password: 'PASSWORD',
-			address: 'ADDRESS'
-
+			accesskey: '',
+			password: '',
+			address: 'messenger.plusmedium.4digitalassets.com'
 		},
 
 		greeting: "Welcome to messenger",
 
 		peers: {
-			system: 'system'
+			system: 'system.plusmedium.4digitalassets.com'
 		}
 	}
 }
