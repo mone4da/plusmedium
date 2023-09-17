@@ -1,0 +1,34 @@
+			<!-- div>
+				<h3>Chatmandoo!</h3>
+				<label id="latency"></label>
+				<div id="dialog">
+					<div>
+						<textarea id="in" readonly></textarea>
+						<div id="prompt">
+							<textarea id="out"></textarea>
+							<button id="send">send</button>
+						</div>
+					</div>
+				</div>
+			</div -->
+
+
+            #dialog{
+                display: flex;
+                flex-direction: column; 
+            }
+            
+            #in{
+                height: 100px;    
+            }
+            
+            #latency{
+                height: 20px;
+                resize: none;
+            }
+            
+            #prompt{
+                display: grid;
+                grid-template-columns: auto 50px;
+                height: 50px;
+            }

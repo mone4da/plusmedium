@@ -1,0 +1,49 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+#root{
+    display: flex;
+    flex-direction: column;
+}
+
+#header{
+    display: grid;
+    grid-template-columns: auto 30%;
+    height: 100px;
+    background: rgb(28, 100, 133);
+    color: white;
+}
+
+#logo{
+    display: flex;
+    flex-direction: column;
+}
+
+#name{
+    width: 200px;
+}
+#door{
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+}
+
+#controlpanel{
+    display: grid;
+    grid-template-columns: 50% auto;
+    height: 400px;
+}
+
+#message{
+    display: flex;
+}   
+
+#peers{
+    display: flex;
+}
+
+#slogan{
+    font-size: small;
+}
