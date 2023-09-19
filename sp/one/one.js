@@ -1,8 +1,8 @@
-
 const fs = require('fs')
 
 class Segment{
 	constructor(id, path, capacity){
+		this.items = []
 		this.id = id
 		this.capacity || 10
 		this.path = path
@@ -35,6 +35,24 @@ class Segment{
 		return item
 	}
 
+	rem(key){
+		let item = this.items.find(item => item.key === key)
+		if (item){
+			delete this.items[this.items.indexOf(item)]
+		}
+
+		return item !== undefined
+	}
+
+	get(key){
+		return this.items.find(item => item.key === key)
+	}
+
+	set(key, data){
+		this.items.find(item => item.key === key).data = {...data}
+		return true
+	}
+
 	has(key){
 		return this.items.find(item => item.key === key) !== undefined
 	}
@@ -51,7 +69,11 @@ class Segment{
 
 class One{
 	constructor(root, size, capacity){
-		this.segments = [...Array(size)].map((_,i) => new Segment(i, root + 'segment-' + i + '.json', capacity))
+		this.segments = [...Array(size)].map((_,i) => this.createSegment(i, root + 'segment-' + i + '.json', capacity))
+	}
+
+	createSegment(index, path, capacity){
+		return new Segment(index, path, capacity)
 	}
 
 	init(){
@@ -66,8 +88,8 @@ class One{
 		this.segments.forEach(s => s.save())
 	}
 
-	saveAs(path){
-		this.segments.forEach(s => s.saveAs(path))
+	saveAs(root){
+		this.segments.forEach(s => s.saveAs(root + 'segment-' + s.id))
 	}
 
 	getSegment(key){
@@ -91,6 +113,31 @@ class One{
 	collect(consume){
 		for(let segment of this.segments)
 			segment.collect( consume )
+	}
+
+	get(key){
+		let segment = this.segments.find(s => s.has(key))
+		return segment && segment.get(key)
+	}
+
+	set(key, data){
+		let segment = this.segmentByKey(key)
+		return segment && segment.set(key, data)
+	}
+
+	has(key){
+		return this.segments.find(s => s.has(key)) !== undefined
+	}
+
+	segmentByKey(key){
+		return this.segments.find(s => s.has(key))
+	}
+
+	segment(index){
+		return index >= 0 &&
+			index < this.segments.length &&
+			this.segments[index] ||
+			new Segment(index, '')
 	}
 
 }

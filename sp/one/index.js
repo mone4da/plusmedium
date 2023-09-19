@@ -1,4 +1,3 @@
-
 const {One} = require('./one')
 
 let one = new One('./data/',20, 500)
@@ -20,8 +19,15 @@ let populate = () => {
 }
 
 
-//populate()
+populate()
 
-one.load()
+/*one.load()
+console.log(one.get(4996))
+
+one.set(4996, {name: 'new name', description: 'new description'})
+
+console.log(one.get(4996))*/
+
 one.collect((sid, item) => console.log(sid, item))
+
 
