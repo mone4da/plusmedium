@@ -19,15 +19,18 @@ let populate = () => {
 }
 
 
-populate()
+//populate()
 
-/*one.load()
-console.log(one.get(4996))
-
-one.set(4996, {name: 'new name', description: 'new description'})
-
-console.log(one.get(4996))*/
-
+one.load()
 one.collect((sid, item) => console.log(sid, item))
+
+//one.collect((sid, item) => console.log(sid, item))
+
+/*console.log(one.get(4983))
+
+one.set(4983, {name: 'new name', description: 'new description'})
+
+console.log(one.get(4983))*/
+
 
 

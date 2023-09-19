@@ -2,14 +2,14 @@ const fs = require('fs')
 
 class Segment{
 	constructor(id, path, capacity){
-		this.items = {}
+		this.items = []
 		this.id = id
 		this.capacity || 10
 		this.path = path
 	}
 
 	init(){
-		fs.writeFileSync(this.path,'{}','utf8')
+		fs.writeFileSync(this.path,'[]','utf8')
 	}
 
 	load(){
@@ -26,41 +26,44 @@ class Segment{
 	}
 
 	flush(){
-		for(let key of Object.keys(this.items))
-			delete this.items[key]
+		this.items.length = 0
 	}
 
 	add(key, data){
-		this.items[key] = data
-		return true
+		let item = {key, data}
+		this.items.push(item)
+		return item
 	}
 
 	rem(key){
-		let item = this.items[key]
-		delete this.items[key]
+		let item = this.items.find(item => item.key === key)
+		if (item){
+			delete this.items[this.items.indexOf(item)]
+		}
+
 		return item !== undefined
 	}
 
 	get(key){
-		return this.items[key]
+		return this.items.find(item => item.key === key)
 	}
 
 	set(key, data){
-		this.items[key] = {...data}
+		this.items.find(item => item.key === key).data = {...data}
 		return true
 	}
 
 	has(key){
-		return this.items[key] !== undefined
+		return this.items.find(item => item.key === key) !== undefined
 	}
 
 	full(){
-		return Object.keys(this.items).length >= this.capacity
+		return this.items.length >= this.capacity
 	}
 
 	collect(consume){
-		for(let [key, data] of Object.entries(this.items))
-			consume(this.id, {key, data})
+		for(let item of this.items)
+			consume(this.id, item)
 	}
 }
 
